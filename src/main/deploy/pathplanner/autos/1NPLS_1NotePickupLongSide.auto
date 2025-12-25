@@ -1,0 +1,67 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.7815863793056181,
+      "y": 4.6061651316659695
+    },
+    "rotation": 122.79953127261922
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1NPLS_MoveBackTo1Foot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "intakeShoot"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "armIntakePosition"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1NPLS_PICKUP_CENTER"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "armScoringPosition"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "1NPLS_MOVEBACK"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "intakeShoot"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
