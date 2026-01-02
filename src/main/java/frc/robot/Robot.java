@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-
-
+  // the code in this file seems to be copied from somewhere. this RobotContainer datatype
+  // appears to be what is really doing the work
   private RobotContainer m_robotContainer;
 
   /**
@@ -52,36 +52,36 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {}
 
+  /** like robotPeriodic(), this function is called every 20ms, exept only when the robot is
+   * in disabled mode.
+   */
   @Override
   public void disabledPeriodic() {}
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    
-    
-  //  String autoSelected = SmartDashboard.getString("Auto Selector",
-   //   "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-    //  = new MyAutoCommand(); break; case "Default Auto": default:
-     // autonomousCommand = new ExampleCommand(); break; }
-    
-    m_robotContainer.getSelectedAuton().schedule();
-    // schedule the autonomous command (example)
-    //if (m_autonomousCommand != null) {
-    //  m_autonomousCommand.schedule();
-    //}
+  
+  // there used to be some code here that was commented out. it appears to be irrelevent.
+  // this is why commenting out code is not a good idea.
+  m_robotContainer.getSelectedAuton().schedule();
   }
 
-  /** This function is called periodically during autonomous. */
+  /** This function is called periodically every 20ms during autonomous. */
   @Override
   public void autonomousPeriodic() {}
 
+  /** teleop is the remote controlled period. this means that the controller
+   * should go live.
+   */
   @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
+    // teleop starts running.
+
+    // we could remove this line and have it bound to a button on the controller.
+    // this way if we run out of atonomus time, we can still continue running our code,
+    // even in teleop mode. i do not know if that is against the rules or not.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
@@ -89,10 +89,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {
-
-    
-  }
+  public void teleopPeriodic() {}
 
   @Override
   public void testInit() {

@@ -40,7 +40,15 @@ public class DriveSubsystem extends SubsystemBase {
   // The gyro sensor
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
 
-  // Odometry class for tracking robot pose
+  /**
+   * this will sum up the movements of the swerve drive to determine the position
+   * of
+   * the robot on the play-field. it appears to also input from the gyro to
+   * account for the robot being
+   * bumped into, however this position will drift over time do to sensor error
+   * being summed into the
+   * position measurement.
+   */
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
       DriveConstants.kDriveKinematics,
       Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
@@ -51,7 +59,6 @@ public class DriveSubsystem extends SubsystemBase {
           m_rearRight.getPosition()
       });
 
-  /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
     // Usage reporting for MAXSwerve template
     HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_MaxSwerve);
@@ -60,6 +67,9 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // Update the odometry in the periodic block
+    // because the odometry relies on summing together the inputs from the sensors,
+    // the higher the frequency
+    // we can get this function to run, the better our mesurements will be.
     m_odometry.update(
         Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
         new SwerveModulePosition[] {
@@ -126,6 +136,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   /**
    * Sets the wheels into an X formation to prevent movement.
+   * does NOT mean setting some X-value
    */
   public void setX() {
     m_frontLeft.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45)));
