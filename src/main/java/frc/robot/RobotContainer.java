@@ -123,6 +123,7 @@ public class RobotContainer {
    */
 
   private void initAutons() {
+    m_robotDrive.initroboconfig();
     m_autoChooser = AutoBuilder.buildAutoChooser();
     // this will put data to be viewed on a laptop runing "SmartDashboard"
     // appeasr to be set up so that you can choose which auto program to run
